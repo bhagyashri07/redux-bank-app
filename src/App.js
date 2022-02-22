@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { useDispatch ,useSelector} from "react-redux";
+
+
+import "./App.css";
+
+import{decrement1,decrement2} from "./reducers";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const user ={
+    username:"Jenny"
+  }
+ 
+  const count = useSelector((state) => state.counter.value)
+
+
+  const dispatch = useDispatch()
+
+  const clickDec  = () => {
+    dispatch(decrement1())
+  }
+  const clickDec1 = () => {
+    dispatch(decrement2())
+  }
+
+
+    return (
+
+      <div className="App">
+        <img className="App__userpic" src={"https://image.ibb.co/nC8vGp/girl.png"} alt="photographer" />
+        <p className="App__username">Hello, { user.username}! </p>
+        <div className="App__amount">
+          $ {count}
+          <p className="App__amount--info">Total Amount</p>
+        </div>
+
+        <section className="App__buttons">
+          <button  data-amount="10000" onClick={clickDec}>WITHDRAW $10,000</button>
+          <button data-amount="5000" onClick={clickDec1}>WITHDRAW $5,000</button>
+        </section>
+
+        <p className="App__giveaway">Give away all your cash to charity</p>
+      </div>
+    
   );
 }
 
